@@ -5,6 +5,8 @@ var config = {
 };
 
 var side = 0;
+var historyStack = [];
+var currentStep = 0;
 
 function createBoard(container) {
     // 创建背景网格
@@ -48,12 +50,44 @@ function createBoard(container) {
             'data-status': 'done',
             'data-side': side
         });
+        if (historyStack.length !== currentStep) {
+            historyStack = historyStack.slice(0, currentStep);
+        }
+        historyStack.push([$(this).attr('data-position'), $(this).attr('data-side')]);
+        currentStep = historyStack.length;
+        console.log(historyStack);
         side = Math.abs(side - 1);
         $boardTop.attr('data-side', side);
-        if(!checkWin.apply(null, $(this).attr('data-position').split(','))) {
-            $('.current-side').text((side === 0 ? '黑': '白')+ '方下棋');
+        if (!checkWin.apply(null, $(this).attr('data-position').split(','))) {
+            $('.current-side').text((side * 1 === 0 ? '黑' : '白') + '方下棋');
         }
-    })
+    });
+
+    $('.backward').on('click', function () {
+        if (currentStep > 0) {
+            currentStep--;
+            $boardTop.find('[data-position="' + historyStack[currentStep][0] + '"]')
+                .removeAttr('data-status')
+                .removeAttr('data-side')
+            side = historyStack[currentStep][1];
+            $boardTop.attr('data-side', side);
+            $('.current-side').text((side * 1 === 0 ? '黑' : '白') + '方下棋');
+        }
+    });
+
+    $('.forward').on('click', function () {
+        if (currentStep < historyStack.length) {
+            $boardTop.find('[data-position="' + historyStack[currentStep][0] + '"]')
+                .attr({
+                    'data-status': 'done',
+                    'data-side': historyStack[currentStep][1]
+                });
+            side = historyStack[currentStep][1];
+            $boardTop.attr('data-side', side);
+            $('.current-side').text((side * 1 === 0 ? '黑' : '白') + '方下棋');
+            currentStep++;
+        }
+    });
 }
 
 function checkWin(xIndex, yIndex) {
@@ -108,7 +142,7 @@ function checkWin(xIndex, yIndex) {
             max = 0;
     }
     if (max === 1) {
-        $('.result').text((side === 1 ? '黑':'白') + '方胜！').show();
+        $('.result').text((side === 1 ? '黑' : '白') + '方胜！').show();
         return true;
     } else {
         return false;
