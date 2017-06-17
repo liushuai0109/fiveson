@@ -1,17 +1,44 @@
-.main {
-    overflow: hidden;
+header {
+    text-align: center;
+    font-size: 24px;
+    padding: 12px 0;
 }
 
-.board {
+.main {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chessboard {
     position: relative;
     overflow: hidden;
     background: #f0f0f0;
+}
+
+.operation {
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+.operation .side {
     float: left;
 }
 
-.info {
-    float: left;
-    margin: 25px;
+.operation button.btn-forward,
+.operation button.btn-backward {
+    float: right;
+}
+
+.selector .select {
+    cursor: pointer;
+    color: #286090;
+    font-size: 14px;
+}
+
+.selector .select:hover {
+    opacity: 0.9;
 }
 
 .result {
@@ -29,9 +56,12 @@
     padding-top: 100px;
 }
 
+.column {
+    float: left;
+}
+
 .cell {
     position: relative;
-    float: left;
     cursor: pointer;
 }
 
@@ -49,19 +79,19 @@
     background: rgba(0, 0, 0, 0.8);
 }
 
-.top[data-side="1"] .cell:hover::after {
+[data-side="1"] .cell:hover::after {
     background: rgba(255, 255, 255, 0.8);
 }
 
-.cell[data-status="done"][data-side="0"]::after {
+.cell[data-side="0"]::after {
     background: rgba(0, 0, 0, 1) !important;
 }
 
-.cell[data-status="done"][data-side="1"]::after {
+.cell[data-side="1"]::after {
     background: rgba(255, 255, 255, 1) !important;
 }
 
-.board .top {
+.chessboard .top {
     position: absolute;
     left: 0;
     top: 0;

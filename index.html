@@ -12,20 +12,17 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-<div class="main">
-    <div class="board" id="board">
+<header>FiveSon五子棋</header>
+<div class="main"></div>
 
-    </div>
-    <div class="info">
-        <div class="current-side">黑方下棋</div>
-        <button class="backward">悔棋</button>
-        <button class="forward">撤销悔棋</button>
-    </div>
-    <div class="result"></div>
-</div>
-
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
-<script src="js/main.js"></script>
+<script src="js/vendor/jquery-1.12.0.min.js"></script>
+<script src="js/vendor/underscore.js"></script>
+<script src="js/vendor/backbone.js"></script>
+<script src="js/chess.model.js"></script>
+<script src="js/chessboard-canvas.view.js"></script>
+<script src="js/chessboard-web.view.js"></script>
+<script src="js/operation.view.js"></script>
+<script src="js/selector.view.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
