@@ -6,7 +6,6 @@
             'click .select': 'select'
         },
         initialize: function () {
-            //this.model = new Chess()
             this.render();
         },
         render: function () {

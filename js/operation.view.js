@@ -8,7 +8,6 @@
             'click .btn-reload': 'reload'
         },
         initialize: function () {
-            //this.model = new Chess()
             this.render();
             this.model.on('change:side', this.onSideChange.bind(this));
             this.model.on('change:win', this.onWin.bind(this))

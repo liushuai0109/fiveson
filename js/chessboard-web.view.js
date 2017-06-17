@@ -46,8 +46,6 @@
             $.each(pieces, function (x, row) {
                 var $column = $('<div/>').addClass('column');
                 $.each(row, function (y, side) {
-                    //if (side !== null) {
-                    //self.drawPiece(context, x, y, side);
                     $('<div/>').addClass('cell')
                         .width(options.size)
                         .height(options.size)
@@ -56,7 +54,6 @@
                             'data-side': side
                         })
                         .appendTo($column);
-                    //}
                 });
                 $column.appendTo($boardTop);
             });
